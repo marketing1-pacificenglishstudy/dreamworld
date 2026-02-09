@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamworld 雙語介紹 | Dreamworld Bilingual Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft JhengHei', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .language-toggle {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .language-toggle button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            margin: 0 10px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .language-toggle button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .language-toggle button.active {
+            background: #764ba2;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .bilingual-section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .bilingual-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .bilingual-text {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .english-text {
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #764ba2;
+            order: 1;
+        }
+
+        .chinese-text {
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            order: 2;
+        }
+
+        .language-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+
+        .english-text .language-label {
+            color: #764ba2;
+        }
+
+        .single-language-view .bilingual-text {
+            grid-template-columns: 1fr;
+        }
+
+        .single-language-view .chinese-text,
+        .single-language-view .english-text {
+            display: none;
+        }
+
+        .single-language-view.show-chinese .chinese-text {
+            display: block;
+        }
+
+        .single-language-view.show-english .english-text {
+            display: block;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .highlight-box h3 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        ul li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .quote-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 10px;
+            font-style: italic;
+        }
+
+        .quote-author {
+            text-align: right;
+            font-weight: bold;
+            color: #667eea;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .bilingual-text {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .bilingual-section {
+                padding: 20px;
+            }
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎢 Dreamworld 夢幻世界</h1>
+            <p class="subtitle">Australia's Largest Theme Park | 澳洲黃金海岸最大主題樂園</p>
+        </div>
+
+        <div class="language-toggle">
+            <button onclick="showBoth()" class="active" id="btnBoth">中文/English</button>
+            <button onclick="showChinese()" id="btnChinese">中文</button>
+            <button onclick="showEnglish()" id="btnEnglish">English</button>
+        </div>
+
+        <div class="content" id="content">
+            
+            <!-- 關於 Dreamworld -->
+            <div class="bilingual-section">
+                <h2>About Dreamworld | 關於 Dreamworld</h2>
+                <div class="bilingual-text">
+                    <div class="chinese-text">
+                        <p>Dreamworld 是澳洲最大且最受歡迎的主題樂園，坐落於昆士蘭州黃金海岸的 Coomera 區域，距離衝浪者天堂（Surfers Paradise）僅 40 分鐘車程，距離布里斯本市中心也只需 40 分鐘。樂園於 1981 年開幕，至今已有超過 40 年的歷史，為數以百萬計的遊客創造了難忘的回憶。</p>
+                    </div>
+                    <div class="english-text">
+                        <p>Dreamworld is Australia's largest and most popular theme park, located in Coomera on Queensland's Gold Coast, just 40 minutes from Surfers Paradise and 40 minutes from Brisbane city center. Opened in 1981, the park has over 40 years of history, creating unforgettable memories for millions of visitors.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 為什麼選擇 Dreamworld -->
+            <div class="bilingual-section">
+                <h2>Why Choose Dreamworld? | 為什麼選擇 Dreamworld？</h2>
+                
+                <div class="bilingual-text">
+                    <div class="chinese-text">
+                        <h3>🎯 五大特色區域</h3>
+                        <ul>
+                            <li><strong>Ocean Parade（海洋遊行區）</strong> - 經典黃金海岸海灘氛圍，高能量遊樂設施</li>
+                            <li><strong>Gold Rush Country（淘金區）</strong> - 重現19世紀澳洲淘金熱時代</li>
+                            <li><strong>DreamWorks Experience（夢工廠體驗區）</strong> - 與史瑞克、功夫熊貓等角色互動</li>
+                            <li><strong>Wiggles World（威格斯世界）</strong> - 專為幼童設計的遊樂區</li>
+                            <li><strong>Tiger Island（老虎島）</strong> - 近距離觀察珍稀動物</li>
+                        </ul>
+                    </div>
+                    <div class="english-text">
+                        <h3>🎯 Five Feature Zones</h3>
+                        <ul>
+                            <li><strong>Ocean Parade</strong> - Classic Gold Coast beach vibes with high-energy rides</li>
+                            <li><strong>Gold Rush Country</strong> - Recreating Australia's 19th-century gold rush era</li>
+                            <li><strong>DreamWorks Experience</strong> - Interactive experiences with Shrek, Kung Fu Panda characters</li>
+                            <li><strong>Wiggles World</strong> - Play area designed for young children</li>
+                            <li><strong>Tiger Island</strong> - Close encounters with rare animals</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 必玩設施 -->
+            <div class="bilingual-section">
+                <h2>🎢 Must-Try Rides | 必玩遊樂設施</h2>
+                
+                <div class="bilingual-text">
+                    <div class="chinese-text">
+                        <h3>Steel Taipan（鋼鐵太攀蛇）</h3>
+                        <p>澳洲最長、最快、最高的多圈型雲霄飛車！這是2021年9月開放的全新設施，以澳洲最致命的毒蛇「太攀蛇」命名。</p>
+                        <ul>
+                            <li>時速達到 105 公里</li>
+                            <li>高度 62 公尺</li>
+                            <li>軌道長度達 1,200 公尺</li>
+                            <li>包含 4 次倒轉及高速螺旋</li>
+                        </ul>
+                    </div>
+                    <div class="english-text">
+                        <h3>Steel Taipan</h3>
+                        <p>Australia's longest, fastest, and tallest multi-launch roller coaster! This brand new attraction opened in September 2021, named after Australia's most venomous snake, the Taipan.</p>
+                        <ul>
+                            <li>Speed up to 105 km/h</li>
+                            <li>Height of 62 meters</li>
+                            <li>Track length of 1,200 meters</li>
+                            <li>Features 4 inversions and high-speed spirals</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bilingual-text">
+                    <div class="chinese-text">
+                        <h3>Giant Drop（巨人墜落塔）</h3>
+                        <p>世界上最高的自由落體設施之一，高達 119 公尺！遊客會被緩慢升至最高點，俯瞰整個黃金海岸的美景，然後以時速 135 公里的速度瞬間墜落。</p>
+                    </div>
+                    <div class="english-text">
+                        <h3>Giant Drop</h3>
+                        <p>One of the world's tallest free-fall rides at 119 meters! Visitors are slowly lifted to the top with panoramic views of the Gold Coast, then plummet at 135 km/h.</p>
+                    </div>
+                </div>
+
+                <div class="bilingual-text">
+                    <div class="chinese-text">
+                        <h3>Tower of Terror II（恐怖塔二代）</h3>
+                        <p>這是南半球最快的遊樂設施，以時速 161 公里發射，在 7 秒內達到最高速度，讓你體驗超過 4.5G 的重力加速度。</p>
+                    </div>
+                    <div class="english-text">
+                        <h3>Tower of Terror II</h3>
+                        <p>The Southern Hemisphere's fastest ride, launching at 161 km/h and reaching top speed in 7 seconds, experiencing over 4.5G of acceleration.</p>
+                    </div>
+                </div>
+
+                <div class="bilingual-text">
+                    <div class="chinese-text">
+                        <h3>The Claw（巨爪）</h3>
+                        <p>這個設施會將遊客升至空中並進行 360 度旋轉擺盪，讓你像鐘擺一樣在空中翻轉，同時體驗失重的快感。最大擺盪角度可達 90 度，懸空高度達 30 公尺。</p>
+                    </div>
+                    <div class="english-text">
+                        <h3>The Claw</h3>
+                        <p>This ride lifts guests into the air and swings them 360 degrees like a pendulum, experiencing weightlessness. Maximum swing angle reaches 90 degrees at a height of 30 meters.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 野生動物體驗 -->
+            <div class="bilingual-section">
+                <h2>🦘 Wildlife Experiences | 野生動物體驗</h2>
+                
+                <div class="bilingual-text">
+                    <div class="chinese-text">
+                        <p>Dreamworld 擁有澳洲最大的動物園之一，學生可以近距離接觸澳洲特有的動物：</p>
+                        <ul>
+                            <li><strong>Tiger Island</strong> - 觀看珍稀蘇門答臘虎和孟加拉虎，學習野生動物保育知識</li>
+                            <li><strong>Corroboree</strong> - 抱無尾熊、餵食袋鼠，了解澳洲本土動物生態</li>
+                            <li><strong>鱷魚表演</strong> - 近距離觀看澳洲鹹水鱷的餵食秀</li>
+                        </ul>
+                    </div>
+                    <div class="english-text">
+                        <p>Dreamworld features one of Australia's largest wildlife collections. Students can get up close with unique Australian animals:</p>
+                        <ul>
+                            <li><strong>Tiger Island</strong> - Watch rare Sumatran and Bengal tigers, learn about wildlife conservation</li>
+                            <li><strong>Corroboree</strong> - Cuddle koalas, feed kangaroos, understand native Australian wildlife ecology</li>
+                            <li><strong>Crocodile Show</strong> - Watch Australian saltwater crocodile feeding demonstrations up close</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 原住民文化體驗 -->
+            <div class="bilingual-section">
+                <h2>🪃 Aboriginal Cultural Experience | 原住民文化體驗</h2>
+                
+                <div class="bilingual-text">
+                    <div class="chinese-text">
+                        <h3>Corroboree Aboriginal Cultural Experience</h3>
+                        <p>這是一個深度文化學習體驗區，學生可以：</p>
+                        <ul>
+                            <li>觀賞原住民傳統舞蹈表演</li>
+                            <li>學習吹奏迪吉里杜管（Didgeridoo）</li>
+                            <li>體驗擲回力鏢（Boomerang）</li>
+                            <li>了解澳洲原住民的 Dreamtime 故事</li>
+                            <li>學習原住民的藝術創作</li>
+                        </ul>
+                    </div>
+                    <div class="english-text">
+                        <h3>Corroboree Aboriginal Cultural Experience</h3>
+                        <p>This is an immersive cultural learning zone where students can:</p>
+                        <ul>
+                            <li>Watch traditional Aboriginal dance performances</li>
+                            <li>Learn to play the Didgeridoo</li>
+                            <li>Experience boomerang throwing</li>
+                            <li>Discover Aboriginal Dreamtime stories</li>
+                            <li>Learn Aboriginal art creation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 教育價值 -->
+            <div class="bilingual-section">
+                <h2>📚 Educational Value | 教育價值</h2>
+                
+                <div class="bilingual-text">
+                    <div class="chinese-text">
+                        <h3>🔬 STEM 學習機會</h3>
+                        <ul>
+                            <li><strong>物理學習</strong> - 透過雲霄飛車學習速度、加速度、重力等概念</li>
+                            <li><strong>生物學習</strong> - 觀察野生動物的行為和生態系統</li>
+                            <li><strong>工程學習</strong> - 了解大型遊樂設施的建造原理</li>
+                        </ul>
+
+                        <h3>🌏 文化與社會學習</h3>
+                        <ul>
+                            <li>深入了解澳洲原住民的歷史和文化傳承</li>
+                            <li>體驗澳洲多元文化社會</li>
+                            <li>學習環境保護和動物保育的重要性</li>
+                        </ul>
+
+                        <h3>💪 個人成長</h3>
+                        <ul>
+                            <li>挑戰自我，克服恐懼，建立自信心</li>
+                            <li>團隊合作，增進同學間的友誼</li>
+                            <li>英語溝通實踐，提升語言能力</li>
+                        </ul>
+                    </div>
+                    <div class="english-text">
+                        <h3>🔬 STEM Learning Opportunities</h3>
+                        <ul>
+                            <li><strong>Physics Learning</strong> - Learn concepts like velocity, acceleration, and gravity through roller coasters</li>
+                            <li><strong>Biology Learning</strong> - Observe wildlife behavior and ecosystems</li>
+                            <li><strong>Engineering Learning</strong> - Understand the construction principles of large-scale rides</li>
+                        </ul>
+
+                        <h3>🌏 Cultural & Social Learning</h3>
+                        <ul>
+                            <li>Deep dive into Aboriginal Australian history and cultural heritage</li>
+                            <li>Experience Australia's multicultural society</li>
+                            <li>Learn the importance of environmental protection and wildlife conservation</li>
+                        </ul>
+
+                        <h3>💪 Personal Growth</h3>
+                        <ul>
+                            <li>Challenge yourself, overcome fears, build confidence</li>
+                            <li>Teamwork and friendship building among classmates</li>
+                            <li>Practice English communication, enhance language skills</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 見證分享 -->
+            <div class="quote-box">
+                <div class="bilingual-text">
+                    <div class="chinese-text">
+                        <p>"Dreamworld 不只是一個遊樂園，它是一個活的教室。學生們在這裡學習物理、生物、歷史和文化，而且是透過有趣和互動的方式。我看到學生們眼中的興奮，以及他們勇於嘗試新事物的勇氣。這正是我們希望在教育旅行中看到的。"</p>
+                        <p class="quote-author">— 教育團體協調員</p>
+                    </div>
+                    <div class="english-text">
+                        <p>"Dreamworld is not just an amusement park; it's a living classroom. Students learn physics, biology, history, and culture here through fun and interactive methods. I see the excitement in students' eyes and their courage to try new things. This is exactly what we hope to see in educational trips."</p>
+                        <p class="quote-author">— Educational Group Coordinator</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 結語 -->
+            <div class="highlight-box">
+                <div class="bilingual-text">
+                    <div class="chinese-text">
+                        <h3>🌟 總結</h3>
+                        <p>Dreamworld 是澳洲黃金海岸不容錯過的旅遊目的地，這裡結合了世界級的刺激遊樂設施、豐富的野生動物體驗、深度的文化學習和寓教於樂的教育價值。</p>
+                        <p>無論是挑戰自我極限的 Giant Drop 和 Steel Taipan，還是近距離接觸澳洲獨特野生動物，或是深入了解原住民文化，Dreamworld 都能為學生提供難忘的學習和成長機會。在這個充滿歡樂和驚喜的環境中，學生們不僅能提升英語能力，還能建立自信、增進友誼，並創造終生難忘的回憶。</p>
+                        <p><strong>讓我們在 Dreamworld 開啟一段精彩的澳洲遊學冒險之旅！</strong></p>
+                    </div>
+                    <div class="english-text">
+                        <h3>🌟 Summary</h3>
+                        <p>Dreamworld is an unmissable destination on Queensland's Gold Coast, combining world-class thrilling rides, rich wildlife experiences, in-depth cultural learning, and educational entertainment value.</p>
+                        <p>Whether challenging yourself on the Giant Drop and Steel Taipan, getting up close with unique Australian wildlife, or deeply understanding Aboriginal culture, Dreamworld provides students with unforgettable learning and growth opportunities. In this environment full of joy and surprises, students can not only improve their English skills but also build confidence, strengthen friendships, and create lifelong memories.</p>
+                        <p><strong>Let's begin an exciting Australian study adventure at Dreamworld!</strong></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <p>🎢 Dreamworld - Australia's Largest Theme Park</p>
+            <p>📍 Dreamworld Parkway, Coomera QLD 4209, Australia</p>
+        </div>
+    </div>
+
+    <script>
+        function showBoth() {
+            const content = document.getElementById('content');
+            content.classList.remove('single-language-view', 'show-chinese', 'show-english');
+            
+            document.getElementById('btnBoth').classList.add('active');
+            document.getElementById('btnChinese').classList.remove('active');
+            document.getElementById('btnEnglish').classList.remove('active');
+        }
+
+        function showChinese() {
+            const content = document.getElementById('content');
+            content.classList.add('single-language-view', 'show-chinese');
+            content.classList.remove('show-english');
+            
+            document.getElementById('btnBoth').classList.remove('active');
+            document.getElementById('btnChinese').classList.add('active');
+            document.getElementById('btnEnglish').classList.remove('active');
+        }
+
+        function showEnglish() {
+            const content = document.getElementById('content');
+            content.classList.add('single-language-view', 'show-english');
+            content.classList.remove('show-chinese');
+            
+            document.getElementById('btnBoth').classList.remove('active');
+            document.getElementById('btnChinese').classList.remove('active');
+            document.getElementById('btnEnglish').classList.add('active');
+        }
+    </script>
+</body>
+</html>
+
