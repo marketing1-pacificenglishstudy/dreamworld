@@ -250,26 +250,56 @@
         }
 
         @media (max-width: 768px) {
-            .bilingual-text {
-                grid-template-columns: 1fr;
-            }
+    .bilingual-text {
+        grid-template-columns: 1fr;
+    }
+    .header h1 {
+        font-size: 2em;
+    }
+    .content {
+        padding: 30px 20px;
+    }
+    .bilingual-section {
+        padding: 20px;
+    }
+    
+    /* ✅ 新增：按鈕響應式 */
+    .language-toggle {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+    .language-toggle button {
+        padding: 12px 20px;
+        font-size: 1em;
+        min-width: 100px;
+        flex: 1;
+        max-width: 140px;
+    }
+    
+    /* ✅ 新增：照片牆手機版 */
+    .photo-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+    }
+    .photo-gallery {
+        padding: 20px;
+    }
+}
 
-            .header h1 {
-                font-size: 2em;
-            }
+@media (max-width: 480px) {
+    .content {
+        padding: 20px 15px;
+    }
+    .header {
+        padding: 40px 20px;
+    }
+    .header h1 {
+        font-size: 1.6em;
+    }
+}
 
-            .content {
-                padding: 30px 20px;
-            }
-
-            .bilingual-section {
-                padding: 20px;
-            }
-
-            .photo-gallery {
-                padding: 20px;
-            }
-        }
     </style>
 </head>
 <body>
