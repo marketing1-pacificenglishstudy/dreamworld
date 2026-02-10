@@ -132,23 +132,6 @@
             color: #764ba2;
         }
 
-        .single-language-view .bilingual-text {
-            grid-template-columns: 1fr;
-        }
-
-        .single-language-view .chinese-text,
-        .single-language-view .english-text {
-            display: none;
-        }
-
-        .single-language-view.show-chinese .chinese-text {
-            display: block;
-        }
-
-        .single-language-view.show-english .english-text {
-            display: block;
-        }
-
         .highlight-box {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: black;
@@ -310,9 +293,7 @@
         </div>
 
         <div class="language-toggle">
-            <button onclick="showBoth()" class="active" id="btnBoth">中文/English</button>
-            <button onclick="showChinese()" id="btnChinese">中文</button>
-            <button onclick="showEnglish()" id="btnEnglish">English</button>
+            <<button class="active" id="btnBoth">中文/English</button>
         </div>
 
         <div class="content" id="content">
@@ -604,36 +585,5 @@
             <p>📍 Dreamworld Parkway, Coomera QLD 4209, Australia</p>
         </div>
     </div>
-
-    <script>
-        function showBoth() {
-            const content = document.getElementById('content');
-            content.classList.remove('single-language-view', 'show-chinese', 'show-english');
-            
-            document.getElementById('btnBoth').classList.add('active');
-            document.getElementById('btnChinese').classList.remove('active');
-            document.getElementById('btnEnglish').classList.remove('active');
-        }
-
-        function showChinese() {
-            const content = document.getElementById('content');
-            content.classList.add('single-language-view', 'show-chinese');
-            content.classList.remove('show-english');
-            
-            document.getElementById('btnBoth').classList.remove('active');
-            document.getElementById('btnChinese').classList.add('active');
-            document.getElementById('btnEnglish').classList.remove('active');
-        }
-
-        function showEnglish() {
-            const content = document.getElementById('content');
-            content.classList.add('single-language-view', 'show-english');
-            content.classList.remove('show-chinese');
-            
-            document.getElementById('btnBoth').classList.remove('active');
-            document.getElementById('btnChinese').classList.remove('active');
-            document.getElementById('btnEnglish').classList.add('active');
-        }
-    </script>
 </body>
 </html>
